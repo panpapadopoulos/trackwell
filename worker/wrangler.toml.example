@@ -1,0 +1,21 @@
+# Template only: copy to wrangler.toml when deploying (Phase 3+). Contains NO secrets.
+# Secrets are set with `wrangler secret put` and never committed:
+#   ADMIN_PASSWORD_HASH   (from tools/hash-password.mjs)
+name = "trackwell"
+main = "worker/src/index.ts"            # Phase 3: thin adapter around worker/src/app.ts
+compatibility_date = "2026-11-01"
+
+[assets]
+directory = "./dist"                    # the SPA is served by the Worker itself (no public GitHub Pages copy)
+not_found_handling = "single-page-application"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "trackwell"
+database_id = "<create with: wrangler d1 create trackwell>"
+migrations_dir = "migrations"
+
+[vars]
+ALLOWED_ORIGIN = "https://trackwell.panagiotispapadopoulos.com"
+
+# Deliberately NO bindings to the legacy SUBTRACK_DATA / EXPENSES_DATA KV namespaces.

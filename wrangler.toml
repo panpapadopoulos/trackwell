@@ -1,0 +1,63 @@
+# Trackwell Worker, LOCAL DEVELOPMENT configuration. Contains no secrets.
+# All database commands in package.json pass --local; nothing here targets
+# production. Before any real deployment (a later phase, with approval), the
+# database_id must be replaced with a real one created by `wrangler d1 create`.
+# Secrets: ADMIN_PASSWORD_HASH comes from .dev.vars locally (gitignored).
+name = "trackwell"
+main = "worker/src/index.ts"
+compatibility_date = "2026-11-01"
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+not_found_handling = "single-page-application"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "trackwell"
+database_id = "00000000-0000-4000-8000-000000000000" # local-only placeholder
+migrations_dir = "migrations"
+
+[vars]
+# The browser origin allowed to make state-changing requests (Vite dev server).
+ALLOWED_ORIGIN = "http://127.0.0.1:5173"
+# Assistant. "mock" = deterministic local parser (no model, no cost, labelled in the UI).
+# Genuine inference needs BOTH an [ai] binding and AI_MODE = "workers-ai"; see
+# wrangler.ai-test.toml and docs/assistant.md. It is never enabled here by default.
+AI_MODE = "mock"
+AI_MODEL = "@cf/zai-org/glm-4.7-flash"
+AI_DAILY_LIMIT = "40"
+
+# ---------------------------------------------------------------------------
+# PRODUCTION (deploy only with: npx wrangler deploy --env production)
+# Bindings are not inherited from the top level, so every one is repeated here.
+# Secret (set with `wrangler secret put ADMIN_PASSWORD_HASH --env production`,
+# never stored in this file): ADMIN_PASSWORD_HASH.
+# ---------------------------------------------------------------------------
+[env.production]
+name = "trackwell"
+workers_dev = false
+preview_urls = false
+routes = [{ pattern = "trackwell.panagiotispapadopoulos.com", custom_domain = true }]
+
+[env.production.assets]
+directory = "./dist"
+binding = "ASSETS"
+run_worker_first = true # every response gets the security headers and the HTTPS redirect
+not_found_handling = "single-page-application"
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "trackwell-production"
+database_id = "9f5802e7-5537-46a5-a8ae-68816b56bb28"
+migrations_dir = "migrations"
+
+[env.production.ai]
+binding = "AI"
+
+[env.production.vars]
+ALLOWED_ORIGIN = "https://trackwell.panagiotispapadopoulos.com"
+AI_MODE = "workers-ai"
+AI_MODEL = "@cf/zai-org/glm-4.7-flash"
+AI_DAILY_LIMIT = "40"

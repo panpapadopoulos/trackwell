@@ -1,0 +1,275 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/public-sans';
+
+/*
+ * Trackwell design tokens: "Date-Due Card" world (impeccable) on the
+ * true-black-flat app style with a ruled T-frame shell (design-taste-frontend).
+ * Data hues validated with dataviz/validate_palette.js (dark on #181716, light on #FFFFFF).
+ * Color budget ≤ 3%: the stamp hue touches DATA only (received money, permanent work);
+ * never buttons, tabs or nav. Primary actions are made primary by inversion.
+ */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --ground: #0e0d0c;
+  --surface: #181716;
+  --raised: #23211f;
+  --rule: #2a2826;
+  --rule-strong: #3a3734;
+  --ink: #ecebe7;
+  --muted: #b4b1aa;
+  --faint: #8f8b84;
+  --stamp: #a276e4; /* received money / permanent days (data hue) */
+  --logo-stamp: #7444c0; /* stamped period block on the light logo tile */
+  --stamp-ink: #c9a9f5; /* stamp lettering: text-contrast step of the same ink */
+  --stamp-tint: #2a2236;
+  --brass: #b88424; /* money out */
+  --brass-tint: #2d2416;
+  --teal: #14a08a; /* regular days */
+  --danger: #f08a7a;
+  --danger-tint: #2e1915;
+  --warning: #e3b553;
+  --warning-tint: #2c2412;
+  --primary-bg: #ecebe7; /* inversion */
+  --primary-fg: #121110;
+  --hatch: rgba(236, 235, 231, 0.07);
+  --focus: #ecebe7;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --ground: #f4f3f0;
+  --surface: #ffffff;
+  --raised: #efede9;
+  --rule: #e4e1dc;
+  --rule-strong: #cfcbc4;
+  --ink: #1a1917;
+  --muted: #56524c;
+  --faint: #6b675f;
+  --stamp: #7444c0;
+  --logo-stamp: #a276e4;
+  --stamp-ink: #6236a8;
+  --stamp-tint: #f1ebfa;
+  --brass: #946412;
+  --brass-tint: #f8f0e1;
+  --teal: #00866f;
+  --danger: #b3261e;
+  --danger-tint: #fbecea;
+  --warning: #7d5800;
+  --warning-tint: #fbf3df;
+  --primary-bg: #1a1917;
+  --primary-fg: #ffffff;
+  --hatch: rgba(26, 25, 23, 0.06);
+  --focus: #1a1917;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    color-scheme: light;
+    --ground: #f4f3f0;
+    --surface: #ffffff;
+    --raised: #efede9;
+    --rule: #e4e1dc;
+    --rule-strong: #cfcbc4;
+    --ink: #1a1917;
+    --muted: #56524c;
+    --faint: #6b675f;
+    --stamp: #7444c0;
+    --logo-stamp: #a276e4;
+    --stamp-ink: #6236a8;
+    --stamp-tint: #f1ebfa;
+    --brass: #946412;
+    --brass-tint: #f8f0e1;
+    --teal: #00866f;
+    --danger: #b3261e;
+    --danger-tint: #fbecea;
+    --warning: #7d5800;
+    --warning-tint: #fbf3df;
+    --primary-bg: #1a1917;
+    --primary-fg: #ffffff;
+    --hatch: rgba(26, 25, 23, 0.06);
+    --focus: #1a1917;
+  }
+}
+
+@theme inline {
+  --font-sans: 'Public Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-stamp: var(--stamp);
+  --color-stamp-ink: var(--stamp-ink);
+  --color-stamp-tint: var(--stamp-tint);
+  --color-brass: var(--brass);
+  --color-brass-tint: var(--brass-tint);
+  --color-teal: var(--teal);
+  --color-danger: var(--danger);
+  --color-danger-tint: var(--danger-tint);
+  --color-warning: var(--warning);
+  --color-warning-tint: var(--warning-tint);
+  --color-primary-bg: var(--primary-bg);
+  --color-primary-fg: var(--primary-fg);
+  --radius-ctl: 4px;
+  --radius-panel: 8px;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@layer base {
+  html {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    /* 100%: respects the browser's default font size; all text sizes are rem. */
+    font-size: 100%;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    font-size: 0.875rem;
+    min-height: 100dvh;
+    background: var(--ground);
+    caret-color: var(--ink);
+  }
+  ::selection {
+    background: var(--stamp-tint);
+    color: var(--ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+  * {
+    scrollbar-color: var(--rule-strong) transparent;
+    scrollbar-width: thin;
+  }
+  a {
+    text-underline-offset: 3px;
+  }
+  /* All figures align digit for digit. */
+  .num {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+}
+
+@layer components {
+  /* Press feedback (emil): instant response on press, never on keyboard repeat. */
+  .pressable {
+    transition:
+      transform 160ms var(--ease-out),
+      background-color 120ms ease,
+      color 120ms ease;
+  }
+  .pressable:active {
+    transform: scale(0.97);
+  }
+  /* "Expected" money: line form, not hue. Dashed underline on figures. */
+  .expected-figure {
+    text-decoration: underline dashed var(--stamp);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 6px;
+  }
+  /* "Planned / projected": dotted outline. */
+  .planned-outline {
+    outline: 1px dotted var(--rule-strong);
+    outline-offset: -1px;
+  }
+  .hatched {
+    /* A repeating hatch TEXTURE (dataviz's accessibility channel for lunch/free periods), not a gradient fill. */
+    /* prettier-ignore */
+    background-image: repeating-linear-gradient(135deg, var(--hatch) 0 2px, transparent 2px 7px); /* taste-skill-ignore */
+  }
+  .skeleton {
+    background: var(--raised);
+    border-radius: 3px;
+    color: transparent !important;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hoverable:hover {
+    background: var(--raised);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pressable,
+  .pressable:active {
+    transform: none;
+    transition:
+      background-color 120ms ease,
+      color 120ms ease;
+  }
+  /* Reduced motion means no travel, not no feedback: opacity/color changes stay (emil). */
+  .motion-travel {
+    transform: none !important;
+    transition-property: opacity !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@media (forced-colors: active) {
+  .expected-figure {
+    text-decoration-color: CanvasText;
+  }
+}
+
+/* Navigation sheet (phone): drawer curve, translateX by own width (emil); opacity-only under reduced motion. */
+.sheet-in {
+  transition:
+    transform 240ms var(--ease-drawer),
+    opacity 240ms var(--ease-drawer);
+  @starting-style {
+    transform: translateX(-100%);
+    opacity: 0.6;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sheet-in {
+    transition: opacity 160ms ease;
+    @starting-style {
+      transform: none;
+      opacity: 0;
+    }
+  }
+}
+
+/* Sheets slide in from the right on the drawer curve; notices rise slightly. */
+dialog.sheet[open] {
+  transition:
+    transform 260ms var(--ease-drawer),
+    opacity 200ms ease;
+  @starting-style {
+    transform: translateX(6%);
+    opacity: 0;
+  }
+}
+.notice-in {
+  transition:
+    transform 200ms var(--ease-out),
+    opacity 200ms ease;
+  @starting-style {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  dialog.sheet[open],
+  .notice-in {
+    transition: opacity 150ms ease;
+    @starting-style {
+      transform: none;
+      opacity: 0;
+    }
+  }
+}

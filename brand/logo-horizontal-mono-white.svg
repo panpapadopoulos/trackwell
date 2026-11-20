@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="214" height="48" viewBox="0 0 214 48" role="img" aria-label="Trackwell logo (monochrome white)">
+  <title>Trackwell logo (monochrome white)</title>
+  <g transform="translate(0 4) scale(1.6667)">
+  <g id="mark">
+    <rect id="p1" x="2.5" y="3.5" width="5.75" height="5.75" rx="1.5" fill="#ffffff"/>
+    <rect id="p2" x="9.125" y="3.5" width="5.75" height="5.75" rx="1.5" fill="#ffffff"/>
+    <rect id="p3-stamp" x="15.75" y="3.5" width="5.75" height="5.75" rx="1.5" fill="#ffffff"/>
+    <rect id="p4" x="9.125" y="10.125" width="5.75" height="5.75" rx="1.5" fill="#ffffff"/>
+    <rect id="p5" x="9.125" y="16.75" width="5.75" height="5.75" rx="1.5" fill="#ffffff"/>
+  </g>
+  </g>
+  <text id="wordmark" x="52" y="34.5" font-family="'Public Sans', 'Public Sans Variable', Arial, sans-serif" font-size="29" font-weight="600" letter-spacing="-0.43" fill="#ffffff">Trackwell</text>
+</svg>

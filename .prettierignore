@@ -1,0 +1,12 @@
+node_modules
+dist
+coverage
+.impeccable
+package-lock.json
+src/domain/legacy/
+playwright-report
+test-results
+*.md
+.taste-skill
+.wrangler
+.local

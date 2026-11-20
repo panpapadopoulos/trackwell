@@ -1,0 +1,5 @@
+# Verbatim legacy oracle: never reformat, never normalize line endings
+src/domain/legacy/** -text
+
+# The CSP pins a sha256 of index.html's inline script: keep its bytes identical on every OS.
+index.html text eol=lf

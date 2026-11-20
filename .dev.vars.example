@@ -1,0 +1,13 @@
+# Local secrets for `wrangler dev` (copy to .dev.vars, which is gitignored).
+# `npm run dev:setup` writes a real .dev.vars for you with a random dev-only password.
+#
+# PBKDF2-SHA256 hash of the single administrator password, format:
+#   pbkdf2-sha256$<iterations>$<salt base64url>$<hash base64url>
+# Generate one with: node tools/hash-password.mjs
+ADMIN_PASSWORD_HASH=
+
+# Non-secret settings live in wrangler.toml [vars]:
+#   ALLOWED_ORIGIN  exact browser origin allowed to make writes (CSRF)
+#   AI_MODE         mock | workers-ai | off   (workers-ai also needs an [ai] binding)
+#   AI_MODEL        Workers AI model id (default @cf/zai-org/glm-4.7-flash)
+#   AI_DAILY_LIMIT  assistant requests per day

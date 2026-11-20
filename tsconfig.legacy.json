@@ -1,0 +1,16 @@
+{
+  "//": "Original SubTrack/Expenses compiler settings (non-strict) for the verbatim legacy oracle and the parity tests that use it.",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "types": ["node"],
+    "paths": { "@/*": ["./src/*"] }
+  },
+  "include": ["src/domain/legacy", "tests/legacy"]
+}
